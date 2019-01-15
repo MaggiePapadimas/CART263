@@ -85,7 +85,7 @@ function draw() {
 function updateAvatar() {
   avatar.x = mouseX;
   avatar.y = mouseY;
-  Shrink the avatar and use constrain() to keep it to reasonable bounds
+//   Shrink the avatar and use constrain() to keep it to reasonable bounds
   avatar.size = constrain(avatar.size - AVATAR_SIZE_LOSS,0,avatar.maxSize);
   if (avatar.size === 0) {
     avatar.active = false;
