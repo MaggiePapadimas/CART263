@@ -155,7 +155,7 @@ function updateFood() {
   food.x += food.vx;
   food.y += food.vy;
 
-// makes the food stay in place
+// makes the food stay in place on screen
   if (food.x < 0) {
       food.x += width;
   }
