@@ -12,7 +12,7 @@ to overlap another circle (food) in order to grow bigger.
 
 // Constants defining key quantities
 const AVATAR_SIZE_GAIN = 50;
-const AVATAR_SIZE_LOSS = 1;
+const AVATAR_SIZE_LOSS = 0.5;
 
 // Avatar is an object defined by its properties
 let avatar = {
@@ -28,8 +28,12 @@ let avatar = {
 let food = {
   x: 0,
   y: 0,
+  vx: 5,
+  vy: 5,
   size: 64,
-  color: '#55cccc'
+  color: '#55cccc',
+  timer: 0,
+  maxSpeed: 10
 }
 
 // preload()
@@ -67,6 +71,7 @@ function draw() {
   // Otherwise we handle the game
   background(0);
   updateAvatar();
+  updateFood();
   checkCollision();
   displayAvatar();
   displayFood();
@@ -81,10 +86,10 @@ function updateAvatar() {
   avatar.x = mouseX;
   avatar.y = mouseY;
   // Shrink the avatar and use constrain() to keep it to reasonable bounds
-  avatar.size = constrain(avatar.size - AVATAR_SIZE_LOSS,0,avatar.maxSize);
-  if (avatar.size === 0) {
-    avatar.active = false;
-  }
+  // avatar.size = constrain(avatar.size - AVATAR_SIZE_LOSS,0,avatar.maxSize);
+  // if (avatar.size === 0) {
+  //   avatar.active = false;
+  // }
 }
 
 // checkCollision()
@@ -100,6 +105,14 @@ function checkCollision() {
   }
 }
 
+function setVelocity() {
+  food.timer += 1;
+  if (food.timer >= 20){
+    food.vx = random(-food.maxSpeed, food.maxSpeed);
+    food.vy = random(-food.maxSpeed, food.maxSpeed);
+    food.timer=0;
+  }
+}
 // displayAvatar()
 //
 // Draw the avatar in its current position, using its size and color
@@ -132,4 +145,28 @@ function displayFood() {
 function positionFood() {
   food.x = random(0,width);
   food.y = random(0,height);
+}
+
+//updateFood function
+function updateFood() {
+  setVelocity();
+// moves the food
+  food.x += food.vx;
+  food.y += food.vy;
+
+// makes the food stay in place
+  if (food.x < 0) {
+      food.x += width;
+  }
+    else if (food.x > width) {
+      food.x -= width;
+    }
+
+  if (food.y < 0) {
+    food.y += height;
+  }
+    else if (food.y > height) {
+      food.y -= height;
+    }
+
 }
