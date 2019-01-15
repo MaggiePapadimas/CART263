@@ -89,7 +89,7 @@ function updateAvatar() {
   avatar.size = constrain(avatar.size - AVATAR_SIZE_LOSS,0,avatar.maxSize);
   if (avatar.size === 0) {
     avatar.active = false;
-  // }
+  }
 }
 
 // checkCollision()
