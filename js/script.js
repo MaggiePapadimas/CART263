@@ -85,7 +85,7 @@ function draw() {
 function updateAvatar() {
   avatar.x = mouseX;
   avatar.y = mouseY;
-//   Shrink the avatar and use constrain() to keep it to reasonable bounds
+  // Shrink the avatar and use constrain() to keep it to reasonable bounds
   avatar.size = constrain(avatar.size - AVATAR_SIZE_LOSS,0,avatar.maxSize);
   if (avatar.size === 0) {
     avatar.active = false;
@@ -105,7 +105,7 @@ function checkCollision() {
   }
 }
 
-//has timer and makes food mover randomly
+//has timer and makes the food move randomly after timer has gone to 20
 function setVelocity() {
   food.timer += 1;
   if (food.timer >= 20){
@@ -154,7 +154,8 @@ function updateFood() {
 // moves the food
   food.x += food.vx;
   food.y += food.vy;
-// makes food loop/ stay on screen
+
+// makes the food stay in place
   if (food.x < 0) {
       food.x += width;
   }
